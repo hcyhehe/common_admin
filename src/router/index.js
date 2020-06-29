@@ -90,16 +90,38 @@ export const asyncRouterMap = [
   },
 
   {
-    path: '/genecode',
+    path: '/base',
     component: Layout,
-    redirect: '/genecode/add',
+    redirect: '/base/info',
     meta: {roles: ['admin']},
     children: [
+      {
+        path: 'info',
+        component: () => import('@/myviews/base/info'),
+        name: 'baseInfo',
+        meta: { title: '基础设置', icon: 'people', noCache: true }
+      }
+    ]
+  },
+
+  {
+    path: '/genecode',
+    component: Layout,
+    redirect: '/genecode/list',
+    meta: {roles: ['admin']},
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/myviews/genecode/list'),
+        name: 'genecodeList',
+        meta: { title: '代码生成', icon: 'table', noCache: true },
+      },
       {
         path: 'add',
         component: () => import('@/myviews/genecode/add'),
         name: 'genecodeAdd',
-        meta: { title: '代码生成', icon: 'table', noCache: true },
+        meta: { title: '添加模块', icon: 'table', noCache: true },
+        hidden: true,
       },
     ]
   },
