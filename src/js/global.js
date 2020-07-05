@@ -26,5 +26,11 @@ erp.questionDel = bg + '/question/del';
 
 erp.orderList = bg + '/order/list';
 
+erp.genecodeAdd = bg + '/genecode/add';
+erp.genecodeList = bg + '/genecode/list';
+erp.genecodeInfo = bg + '/genecode/info';
+erp.genecodeEdit = bg + '/genecode/edit';
+erp.genecodeDel = bg + '/genecode/del';
+
 
 export default erp;

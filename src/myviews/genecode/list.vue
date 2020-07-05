@@ -15,12 +15,12 @@
       </el-table-column>
       <el-table-column label="模块名" align="center" width="">
         <template slot-scope="scope">
-          <span>{{ scope.row }}</span>
+          <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
       <el-table-column label="图标" width="" align="center">
         <template slot-scope="scope">
-          <img class="qnImg" :src="scope.row">
+          <span>{{ scope.row.icon }}</span>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" width="" align="center">
@@ -30,8 +30,8 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="220" class-name="small-padding fixed-width geLiBtn">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary">编辑</el-button>
-          <el-button size="mini" type="danger">删除</el-button>
+          <el-button size="mini" type="primary" @click="edit(scope.row.id)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="remove(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -94,17 +94,40 @@ export default {
     
     getList(){
       let that = this;
-      that.listLoading = false;
+      aGet(base.genecodeList, this.params).then(res=>{
+        console.log('genecodeList', res.data);
+        that.list = res.data.data;
+        that.total = res.data.count;
+        that.listLoading = false;
+      }).catch(err=>{
+        that.listLoading = false;
+        console.log(err);
+      })
+    },
 
-      // aGet(base.orderList, this.params).then(res=>{
-      //   console.log('orderList', res.data);
-      //   that.list = res.data.data;
-      //   that.total = res.data.count;
-      //   that.listLoading = false;
-      // }).catch(err=>{
-      //   that.listLoading = false;
-      //   console.log(err);
-      // })
+    edit(id){
+      this.$router.push({path:'/genecode/edit', query:{id} });
+    },
+
+    remove(id){
+      let that = this;
+      this.$confirm('确定删除此条数据?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        aPost(base.genecodeDel, {id}).then(res=>{
+          console.log('genecodeDel', res.data);
+          if(res.data.code == 2000000){
+            that.$message.success('删除成功');
+            that.getList();
+          } else {
+            that.$message.warning(res.data.msg);
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+      }).catch(() => {});
     },
 
   },

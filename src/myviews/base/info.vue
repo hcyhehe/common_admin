@@ -1,14 +1,17 @@
 <template>
   <div class="qna">
-    <el-form ref="form" label-width="80px">
-      <el-form-item label="排序">
-        <el-input v-model.trim="params.sort" placeholder="请输入排序" style="width:200px;" clearable></el-input>
+    <el-form ref="form" label-width="90px">
+      <el-form-item label="项目名">
+        <el-input v-model.trim="params.name" placeholder="请输入项目名" style="width:300px;" clearable></el-input>
       </el-form-item>
-      <el-form-item label="问题">
-        <el-input v-model.trim="params.question" placeholder="请输入问题" style="width:200px;" clearable></el-input>
+      <el-form-item label="端口">
+        <el-input v-model.trim="params.port" placeholder="请输入端口" style="width:300px;" clearable></el-input>
       </el-form-item>
-      <el-form-item label="答案">
-        <el-input v-model.trim="params.answer" placeholder="请输入答案" style="width:200px;" clearable></el-input>
+      <el-form-item label="Admin密钥">
+        <el-input v-model.trim="params.akey" placeholder="请输入密钥" style="width:300px;" clearable></el-input>
+      </el-form-item>
+      <el-form-item label="H5密钥">
+        <el-input v-model.trim="params.hkey" placeholder="请输入密钥" style="width:300px;" clearable></el-input>
       </el-form-item>
 
       <el-form-item>
@@ -30,14 +33,11 @@ export default {
     return {
       userInfo: {},
       params: {
-        id: '',
-        question: '',
-        answer: '',
-        sort: '',
+        name: '',
+        port: '',
+        akey: '',
+        hkey: '',
       },
-      upload: base.upload,
-      fileList: [],
-      limit: 1,
     }
   },
   methods:{
@@ -49,26 +49,22 @@ export default {
           return this.$message.warning('填写不完整');
         }
       }
-      if(!judgeNum1(this.params.sort)){
-        return this.$message.warning('排序不是非负整数');
-      }
-      aPost(base.questionAdd2, that.params).then(res=>{
-        if(res.data.code==2000000){
-          that.$message.success('提交成功');
-          that.$router.push({path:'/question/list2', query:{id: that.params.id}});
-        } else {
-          that.$message.warning(res.data.msg);
-        }
-      }).catch(err=>{
-        console.log(err);
-      })
+      // aPost(base.questionAdd2, that.params).then(res=>{
+      //   if(res.data.code==2000000){
+      //     that.$message.success('提交成功');
+      //   } else {
+      //     that.$message.warning(res.data.msg);
+      //   }
+      // }).catch(err=>{
+      //   console.log(err);
+      // });
     },
   },
   created(){
     this.userInfo = JSON.parse(localStorage.getItem('st_userinfo'));
   },
   mounted(){
-    this.params.id = this.$route.query.id;
+    
   }
 }
 </script>

@@ -123,6 +123,13 @@ export const asyncRouterMap = [
         meta: { title: '添加模块', icon: 'table', noCache: true },
         hidden: true,
       },
+      {
+        path: 'edit',
+        component: () => import('@/myviews/genecode/edit'),
+        name: 'genecodeEdit',
+        meta: { title: '编辑模块', icon: 'table', noCache: true },
+        hidden: true,
+      },
     ]
   },
   

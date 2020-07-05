@@ -106,6 +106,7 @@ export default {
     return {
       userInfo: {},
       params:{
+        id: '',
         name: '',
         sort: '',
         icon: 'list',
@@ -161,6 +162,22 @@ export default {
     }
   },
   methods:{
+    genecodeInfo(){
+      let that = this;
+      aGet(base.genecodeInfo, {id:this.params.id}).then(res=>{
+        console.log('genecodeInfo', res.data);
+        if(res.data.code==2000000){
+          let data = res.data.data;
+          that.params.name = data.name;
+          that.params.sort = data.sort;
+          that.params.icon = data.icon;
+          that.data = data.detail;
+        } 
+      }).catch(err=>{
+        console.log(err);
+      });
+    },
+
     addLine(){
       const obj = {
         name:'', type:'int', leng:'', deci:0, is_null:1, default_val:'', is_mkey:1, is_autoincre:1, 
@@ -197,9 +214,9 @@ export default {
       }
       this.params.data = this.data;
 
-      aPost(base.genecodeAdd, that.params).then(res=>{
+      aPost(base.genecodeEdit, that.params).then(res=>{
         if(res.data.code==2000000){
-          that.$message.success('提交成功');
+          that.$message.success('编辑成功');
           that.$router.push({path:'/genecode/list'});
         } else {
           that.$message.warning(res.data.msg);
@@ -213,10 +230,11 @@ export default {
 
   created(){
     this.userInfo = JSON.parse(localStorage.getItem('st_userinfo'));
+    this.params.id = this.$route.query.id;
   },
 
   mounted(){
-    
+    this.genecodeInfo();
   }
 }
 </script>
