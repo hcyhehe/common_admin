@@ -32,5 +32,10 @@ erp.genecodeInfo = bg + '/genecode/info';
 erp.genecodeEdit = bg + '/genecode/edit';
 erp.genecodeDel = bg + '/genecode/del';
 
+erp.baseEdit = bg + '/base/edit';
+erp.baseInfo = bg + '/base/info';
+
+erp.productProject = bg + '/product/project';
+
 
 export default erp;

@@ -4,6 +4,7 @@
       <!-- <el-input placeholder="订单编号" v-model.trim="params.order_id" style="width: 250px;" class="filter-item" />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="search">搜索</el-button> -->
       <el-button v-waves class="filter-item" type="primary" icon="" @click="add">添加</el-button>
+      <el-button v-waves class="filter-item" type="primary" icon="" @click="Product">生成项目</el-button>
     </div>
 
     <el-table v-loading="listLoading" :key="tableKey" :data="list" border fit stripe highlight-current-row 
@@ -128,6 +129,33 @@ export default {
           console.log(err);
         });
       }).catch(() => {});
+    },
+
+    Product(){
+      let that = this;
+      aGet(base.baseInfo).then(res=>{
+        if(res.data.code==2000000){
+          let data = res.data.data;
+          for(let i in data){
+            if(!data[i]){
+              return that.$message.warning('项目基础设置填写不完整，请前往 基础设置 一项填写完整');
+            }
+          }
+          if(that.list.length==0){
+            return that.$message.warning('请先添加至少一个模块');
+          }
+          that.$message.info('项目生成中，请稍等...');
+          aPost(base.productProject).then(res2=>{
+            console.log('productProject', res2.data);
+          }).catch(err=>{
+            console.log(err);
+          });
+        } else {
+          that.$message.warning(res.data.msg);
+        }
+      }).catch(err=>{
+        console.log(err);
+      });
     },
 
   },

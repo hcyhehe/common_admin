@@ -192,8 +192,8 @@ export default {
 
     onSubmit(){
       let that = this;
-      console.log('this.params', JSON.stringify(this.params));
-      console.log('this.data', JSON.stringify(this.data));
+      //console.log('this.params', JSON.stringify(this.params));
+      //console.log('this.data', JSON.stringify(this.data));
       if(!this.params.name){
         return this.$message.warning('请填写数据表名');
       }
