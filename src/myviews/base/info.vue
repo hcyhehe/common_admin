@@ -1,6 +1,6 @@
 <template>
   <div class="qna">
-    <el-form ref="form" label-width="90px">
+    <el-form ref="form" label-width="95px">
       <el-form-item label="项目名">
         <el-input v-model.trim="params.project_name" placeholder="请输入项目名" style="width:300px;" clearable></el-input>
       </el-form-item>
@@ -14,13 +14,19 @@
         <el-input v-model.trim="params.ft_remark" placeholder="请输入前端说明" style="width:300px;" clearable></el-input>
       </el-form-item>
       <el-form-item label="Admin密钥">
-        <el-input v-model.trim="params.akey" placeholder="请输入密钥" style="width:300px;" clearable></el-input>
+        <el-input v-model.trim="params.akey" placeholder="请输入Admin密钥" style="width:300px;" clearable></el-input>
       </el-form-item>
       <el-form-item label="H5密钥">
-        <el-input v-model.trim="params.hkey" placeholder="请输入密钥" style="width:300px;" clearable></el-input>
+        <el-input v-model.trim="params.hkey" placeholder="请输入H5密钥" style="width:300px;" clearable></el-input>
       </el-form-item>
       <el-form-item label="数据库名">
-        <el-input v-model.trim="params.db_name" placeholder="请输入密钥" style="width:300px;" clearable></el-input>
+        <el-input v-model.trim="params.db_name" placeholder="请输入数据库名" style="width:300px;" clearable></el-input>
+      </el-form-item>
+      <el-form-item label="数据库账号">
+        <el-input v-model.trim="params.db_user" placeholder="请输入数据库账号" style="width:300px;" clearable></el-input>
+      </el-form-item>
+      <el-form-item label="数据库密码">
+        <el-input v-model.trim="params.db_pass" placeholder="请输入数据库密码" style="width:300px;" clearable></el-input>
       </el-form-item>
 
       <el-form-item>
@@ -49,6 +55,8 @@ export default {
         akey: '',
         hkey: '',
         db_name: '',
+        db_user: '',
+        db_pass: '',
       },
     }
   },
