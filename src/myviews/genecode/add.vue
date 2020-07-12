@@ -133,7 +133,8 @@ export default {
         { label: '日期', value: 6 },
         { label: '时间', value: 7 },
         { label: '日期时间', value: 8 },
-        { label: '无', value: 9 },
+        { label: '非表单时间记录', value: 9 },
+        { label: '其他', value: 10 },
       ],
       icOptions: [
         { label: 'list', value: 'list' },
