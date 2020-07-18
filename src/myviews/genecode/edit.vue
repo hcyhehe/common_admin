@@ -12,10 +12,15 @@
         <el-input class="geInput1" v-model="params.sort" placeholder="排序" />
       </el-form-item>
       <el-form-item label="图标:">
-          <el-select class="geInput4" v-model="params.icon" placeholder="请选择">
-            <el-option v-for="(obj,index) in icOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
-          </el-select>
-        </el-form-item>
+        <el-select class="geInput4" v-model="params.icon" placeholder="请选择">
+          <el-option v-for="(obj,index) in icOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="删除:">
+        <el-select class="geInput2" v-model="params.is_deleted" placeholder="请选择">
+          <el-option v-for="(obj,index) in delOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
+        </el-select>
+      </el-form-item>
     </el-form>
 
     <el-form v-for="(obj,index) in data" :key="obj+index">
@@ -25,7 +30,7 @@
           <el-input class="geInput4" v-model="obj.name" placeholder="字段名" />
         </el-form-item>
         <el-form-item label="类型:">
-          <el-select class="geInput3" v-model="obj.type" placeholder="请选择">
+          <el-select class="geInput3" v-model="obj.type" placeholder="请选择" @change="typeChange($event, index)">
             <el-option v-for="(obj,index) in bgOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
           </el-select>
         </el-form-item>
@@ -110,6 +115,7 @@ export default {
         name: '',
         sort: '',
         icon: 'list',
+        is_deleted: 1,
       },
       data:[
         {
@@ -161,6 +167,10 @@ export default {
         { label: '否', value: 1 },
         { label: '是', value: 2 },
       ],
+      delOptions: [
+        { label: '真', value: 1 },
+        { label: '假', value: 2 },
+      ],
     }
   },
   methods:{
@@ -173,6 +183,7 @@ export default {
           that.params.name = data.name;
           that.params.sort = data.sort;
           that.params.icon = data.icon;
+          that.params.is_deleted = data.is_deleted;
           that.data = data.detail;
         } 
       }).catch(err=>{
@@ -190,6 +201,33 @@ export default {
 
     del(index){
       this.data.splice(index, 1);
+    },
+
+    typeChange(e, index){
+      if(e == 'int'){
+        this.data[index].leng = 11;
+        this.data[index].deci = 0;
+      }
+      if(e == 'smallint'){
+        this.data[index].leng = 4;
+        this.data[index].deci = 0;
+      }
+      if(e == 'varchar'){
+        this.data[index].leng = null;
+        this.data[index].deci = 0;
+      }
+      if(e == 'text'){
+        this.data[index].leng = 0;
+        this.data[index].deci = 0;
+      }
+      if(e == 'decimal'){
+        this.data[index].leng = 11;
+        this.data[index].deci = 2;
+      }
+      if(e == 'datetime'){
+        this.data[index].leng = 0;
+        this.data[index].deci = 0;
+      }
     },
 
     onSubmit(){

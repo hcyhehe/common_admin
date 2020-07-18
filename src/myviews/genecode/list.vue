@@ -24,6 +24,11 @@
           <span>{{ scope.row.icon }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="删除" width="" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.is_deleted | d }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="创建时间" width="" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.create_time | t }}</span>
@@ -68,6 +73,10 @@ export default {
       if(int==3) return '成功办理';
       if(int==4) return '已完成';
       if(int==5) return '已取消';
+    },
+    d(int){
+      if(int==1) return '真';
+      if(int==2) return '假';
     },
   },
   data(){
