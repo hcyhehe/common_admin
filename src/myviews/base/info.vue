@@ -4,6 +4,9 @@
       <el-form-item label="项目名">
         <el-input v-model.trim="params.project_name" placeholder="请输入项目名" style="width:300px;" clearable></el-input>
       </el-form-item>
+      <el-form-item label="项目中文名">
+        <el-input v-model.trim="params.cname" placeholder="请输入项目中文名" style="width:300px;" clearable></el-input>
+      </el-form-item>
       <el-form-item label="端口">
         <el-input v-model.trim="params.port" placeholder="请输入端口" style="width:300px;" clearable></el-input>
       </el-form-item>
@@ -49,6 +52,7 @@ export default {
       userInfo: {},
       params: {
         project_name: '',
+        cname: '',
         port: '',
         bg_remark: '',
         ft_remark: '',

@@ -19,6 +19,11 @@
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="中文名" align="center" width="">
+        <template slot-scope="scope">
+          <span>{{ scope.row.cname }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="图标" width="" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.icon }}</span>
@@ -27,6 +32,11 @@
       <el-table-column label="删除" width="" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.is_deleted | d }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="类型" width="" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.is_order | o }}</span>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" width="" align="center">
@@ -78,6 +88,11 @@ export default {
       if(int==1) return '真';
       if(int==2) return '假';
     },
+    o(int){
+      if(int==1) return '列表类';
+      if(int==2) return '订单类';
+      if(int==3) return '基础信息类';
+    }
   },
   data(){
     return {

@@ -8,6 +8,9 @@
       <el-form-item label="数据表名:">
         <el-input class="geInput4" v-model="params.name" placeholder="数据表名" />
       </el-form-item>
+      <el-form-item label="中文名:">
+        <el-input class="geInput4" v-model="params.cname" placeholder="中文名" />
+      </el-form-item>
       <el-form-item label="排序:">
         <el-input class="geInput1" v-model="params.sort" placeholder="排序" />
       </el-form-item>
@@ -19,6 +22,11 @@
       <el-form-item label="删除:">
         <el-select class="geInput2" v-model="params.is_deleted" placeholder="请选择">
           <el-option v-for="(obj,index) in delOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="订单类:">
+        <el-select class="geInput2" v-model="params.is_order" placeholder="请选择">
+          <el-option v-for="(obj,index) in ifOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
         </el-select>
       </el-form-item>
     </el-form>
@@ -113,9 +121,11 @@ export default {
       params:{
         id: '',
         name: '',
+        cname: '',
         sort: '',
         icon: 'list',
         is_deleted: 1,
+        is_order: 1,
       },
       data:[
         {
@@ -181,9 +191,11 @@ export default {
         if(res.data.code==2000000){
           let data = res.data.data;
           that.params.name = data.name;
+          that.params.cname = data.cname;
           that.params.sort = data.sort;
           that.params.icon = data.icon;
           that.params.is_deleted = data.is_deleted;
+          that.params.is_order = data.is_order;
           that.data = data.detail;
         } 
       }).catch(err=>{
@@ -236,6 +248,9 @@ export default {
       //console.log('this.data', JSON.stringify(this.data));
       if(!this.params.name){
         return this.$message.warning('请填写数据表名');
+      }
+      if(!this.params.cname){
+        return this.$message.warning('请填写数据表中文名');
       }
       if(!this.params.sort){
         return this.$message.warning('请填写排序');
