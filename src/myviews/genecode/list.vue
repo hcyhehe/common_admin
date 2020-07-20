@@ -34,7 +34,7 @@
           <span>{{ scope.row.is_deleted | d }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="类型" width="" align="center">
+      <el-table-column label="前端类型" width="" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.is_order | o }}</span>
         </template>
@@ -89,7 +89,7 @@ export default {
       if(int==2) return '假';
     },
     o(int){
-      if(int==1) return '列表类';
+      if(int==1) return '常规类';
       if(int==2) return '订单类';
       if(int==3) return '基础信息类';
     }

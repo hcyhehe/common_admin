@@ -24,9 +24,9 @@
           <el-option v-for="(obj,index) in delOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="订单类:">
+      <el-form-item label="前端类型:">
         <el-select class="geInput2" v-model="params.is_order" placeholder="请选择">
-          <el-option v-for="(obj,index) in ifOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
+          <el-option v-for="(obj,index) in fttOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
         </el-select>
       </el-form-item>
     </el-form>
@@ -84,7 +84,7 @@
         </el-form-item>
       </el-form>
 
-      <el-form class="elForm bb" :inline="true" label-width="65px">
+      <el-form class="elForm bb" :inline="true" label-width="75px">
         <el-form-item class="geTitle" label="前端"></el-form-item>
         <el-form-item label="搜索项:">
           <el-select class="geInput1" v-model="obj.is_search" placeholder="请选择">
@@ -94,6 +94,14 @@
         <el-form-item label="类型:">
           <el-select class="geInput4" v-model="obj.ft_type" placeholder="请选择">
             <el-option v-for="(obj,index) in ftOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="中文名:">
+          <el-input class="geInput4" v-model="obj.cname" placeholder="中文名" />
+        </el-form-item>
+        <el-form-item label="列表显示:">
+          <el-select class="geInput1" v-model="obj.list_show" placeholder="请选择">
+            <el-option v-for="(obj,index) in ifOptions" :key="obj+index" :label="obj.label" :value="obj.value"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -129,7 +137,7 @@ export default {
       data:[
         {
           name:'', type:'int', leng:11, deci:0, is_null:1, default_val:'', is_mkey:1, is_autoincre:1, 
-          remark:'', is_search: 1, ft_type: 1, is_sort: 1, up_down: 'desc', 
+          remark:'', is_search: 1, ft_type: 1, is_sort: 1, up_down: 'desc', cname:'', list_show:2,
         }
       ],
       bgOptions:[
@@ -180,13 +188,18 @@ export default {
         { label: '真', value: 1 },
         { label: '假', value: 2 },
       ],
+      fttOptions: [
+        { label: '常规类', value: 1 },
+        { label: '订单类', value: 2 },
+        { label: '基础信息类', value: 3 },
+      ],
     }
   },
   methods:{
     addLine(){
       const obj = {
         name:'', type:'int', leng:11, deci:0, is_null:1, default_val:'', is_mkey:1, is_autoincre:1, 
-        remark:'', is_search: 1, ft_type: 1, is_sort: 1, up_down: 'desc',
+        remark:'', is_search: 1, ft_type: 1, is_sort: 1, up_down: 'desc', cname:'', list_show:2,
       }
       this.data.push(obj);
     },
@@ -244,7 +257,7 @@ export default {
       }
       for(let i=0;i<this.data.length;i++){
         if(!String(this.data[i].name) || !String(this.data[i].type) || !String(this.data[i].leng) 
-          || !String(this.data[i].deci) || !String(this.data[i].ft_type) ){
+          || !String(this.data[i].deci) || !String(this.data[i].ft_type) || !String(this.data[i].cname)){
           return this.$message.warning(`请检查第${i+1}行前后端参数`);
         }
       }
