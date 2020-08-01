@@ -60,36 +60,6 @@ export const constantRouterMap = [
 
 export const asyncRouterMap = [
   {
-    path: '/user',
-    component: Layout,
-    redirect: '/user/list',
-    meta: {roles: ['admin', 'editor']},
-    children: [
-      {
-        path: 'list',
-        component: () => import('@/myviews/user/list'),
-        name: 'userList',
-        meta: { title: '会员管理', icon: 'wechat', noCache: true }
-      }
-    ]
-  },
-  
-  {
-    path: '/order',
-    component: Layout,
-    redirect: '/order/list',
-    meta: {roles: ['admin', 'editor']},
-    children: [
-      {
-        path: 'list',
-        component: () => import('@/myviews/order/list'),
-        name: 'orderList',
-        meta: { title: '订单管理', icon: 'list', noCache: true }
-      }
-    ]
-  },
-
-  {
     path: '/base',
     component: Layout,
     redirect: '/base/info',
